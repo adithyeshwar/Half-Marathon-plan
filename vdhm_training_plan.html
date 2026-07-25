@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adithyeshwar – VDHM 2026 Training Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #161922;
+    --border: #252a36;
+    --accent: #f97316;
+    --accent2: #38bdf8;
+    --text: #e8eaf0;
+    --muted: #7b8196;
+    --easy: #22c55e;
+    --tempo: #f59e0b;
+    --long: #f97316;
+    --rest: #475569;
+    --cross: #a78bfa;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0d0f14 0%, #111827 60%, #1a0a00 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '21.1';
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 200px;
+    font-weight: 700;
+    color: rgba(249,115,22,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .race-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(249,115,22,0.12);
+    border: 1px solid rgba(249,115,22,0.3);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .race-tag span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero .sub { color: var(--muted); font-size: 15px; margin-bottom: 28px; }
+
+  .stats-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    min-width: 130px;
+  }
+  .stat .val {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; letter-spacing: 0.5px; }
+
+  /* SECTION */
+  .section { padding: 40px 40px 0; }
+  .section-title {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+
+  /* PHASE CARDS */
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .phase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .phase-card.base::before { background: var(--easy); }
+  .phase-card.build::before { background: var(--tempo); }
+  .phase-card.peak::before { background: var(--accent); }
+  .phase-card.taper::before { background: var(--accent2); }
+
+  .phase-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-family: 'Space Mono', monospace;
+  }
+  .phase-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .phase-weeks { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .phase-items { list-style: none; }
+  .phase-items li {
+    font-size: 13px;
+    color: #b0b8cc;
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+  .phase-items li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+
+  /* WEEKLY PLAN TABLE */
+  .week-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .week-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .week-btn:hover, .week-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+    font-weight: 700;
+  }
+  .week-btn.phase-base { border-left: 3px solid var(--easy); }
+  .week-btn.phase-build { border-left: 3px solid var(--tempo); }
+  .week-btn.phase-peak { border-left: 3px solid var(--accent); }
+  .week-btn.phase-taper { border-left: 3px solid var(--accent2); }
+
+  .week-table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .week-header {
+    background: rgba(249,115,22,0.08);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .week-header .wh-title { font-size: 16px; font-weight: 700; }
+  .week-header .wh-meta { font-size: 13px; color: var(--muted); font-family: 'Space Mono', monospace; }
+
+  .day-row {
+    display: grid;
+    grid-template-columns: 110px 120px 1fr 120px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    gap: 12px;
+    transition: background 0.1s;
+  }
+  .day-row:last-child { border-bottom: none; }
+  .day-row:hover { background: rgba(255,255,255,0.02); }
+
+  .day-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .run-type {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 700;
+  }
+  .type-easy { background: rgba(34,197,94,0.12); color: var(--easy); }
+  .type-tempo { background: rgba(245,158,11,0.12); color: var(--tempo); }
+  .type-long { background: rgba(249,115,22,0.15); color: var(--accent); }
+  .type-rest { background: rgba(71,85,105,0.2); color: var(--rest); }
+  .type-cross { background: rgba(167,139,250,0.12); color: var(--cross); }
+  .type-interval { background: rgba(56,189,248,0.12); color: var(--accent2); }
+
+  .day-detail { font-size: 13px; color: #b0b8cc; line-height: 1.5; }
+  .day-km {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: right;
+  }
+  .day-km .unit { font-size: 11px; color: var(--muted); font-weight: 400; }
+
+  /* PACE GUIDE */
+  .pace-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .pace-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .pace-card .pace-type { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; font-family: 'Space Mono', monospace; }
+  .pace-card .pace-val { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; }
+  .pace-card .pace-note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .tip-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .tip-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .tip-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .tip-body { font-size: 13px; color: #9aa0b5; line-height: 1.55; }
+
+  /* FOOTER */
+  .footer {
+    margin: 48px 40px 0;
+    padding: 20px 24px;
+    background: rgba(249,115,22,0.06);
+    border: 1px solid rgba(249,115,22,0.2);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .footer strong { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    .hero { padding: 32px 20px 28px; }
+    .hero h1 { font-size: 26px; }
+    .section { padding: 32px 20px 0; }
+    .phases { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .day-row { grid-template-columns: 90px 90px 1fr; }
+    .day-km { display: none; }
+    .footer { margin: 32px 20px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="race-tag"><span></span> Race Registered · Virtual Event</div>
+  <h1>Hey Adithyeshwar,<br>Let's get you to <em>Sub 2:30</em> 🏃</h1>
+  <p class="sub">Vedanta Delhi Half Marathon 2026 · 18 October 2026 · 21.097 km</p>
+  <div class="stats-row">
+    <div class="stat"><div class="val">12</div><div class="lbl">Weeks to race</div></div>
+    <div class="stat"><div class="val">1:24</div><div class="lbl">10K baseline</div></div>
+    <div class="stat"><div class="val">4</div><div class="lbl">Days/week running</div></div>
+    <div class="stat"><div class="val">~6:45</div><div class="lbl">Target HM pace /km</div></div>
+  </div>
+</div>
+
+<!-- PHASES -->
+<div class="section">
+  <div class="section-title">Training Phases</div>
+  <div class="phases">
+    <div class="phase-card base">
+      <div class="phase-label">Phase 1</div>
+      <div class="phase-name">Base Build</div>
+      <div class="phase-weeks">Weeks 1–4 · Jul 25 – Aug 21</div>
+      <ul class="phase-items">
+        <li>Aerobic base + easy mileage</li>
+        <li>Long runs up to 14 km</li>
+        <li>Strides twice/week</li>
+        <li>One tempo 20–25 min</li>
+      </ul>
+    </div>
+    <div class="phase-card build">
+      <div class="phase-label">Phase 2</div>
+      <div class="phase-name">Build & Threshold</div>
+      <div class="phase-weeks">Weeks 5–8 · Aug 22 – Sep 18</div>
+      <ul class="phase-items">
+        <li>Tempo runs extended to 35 min</li>
+        <li>Long runs up to 18 km</li>
+        <li>Introduce interval work</li>
+        <li>Weekly mileage peaks ~42 km</li>
+      </ul>
+    </div>
+    <div class="phase-card peak">
+      <div class="phase-label">Phase 3</div>
+      <div class="phase-name">Peak & Taper</div>
+      <div class="phase-weeks">Weeks 9–12 · Sep 19 – Oct 18</div>
+      <ul class="phase-items">
+        <li>Wk 9–10: race-pace long runs</li>
+        <li>Wk 11: taper starts, 30% drop</li>
+        <li>Wk 12: race week, fresh legs</li>
+        <li>Oct 18: Race Day! 🎯</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY PLAN -->
+<div class="section">
+  <div class="section-title">Weekly Breakdown</div>
+  <div class="week-nav" id="weekNav"></div>
+  <div class="week-table" id="weekTable"></div>
+</div>
+
+<!-- PACE GUIDE -->
+<div class="section">
+  <div class="section-title">Your Pace Guide</div>
+  <div class="pace-grid">
+    <div class="pace-card">
+      <div class="pace-type">Easy / Recovery</div>
+      <div class="pace-val" style="color:var(--easy)">8:00–9:00</div>
+      <div class="pace-note">min/km · conversational breathing</div>
+    </div>
+    <div class="pace-card">
+      <div class="pace-type">Tempo / Threshold</div>
+      <div class="pace-val" style="color:var(--tempo)">6:45–7:10</div>
+      <div class="pace-note">min/km · comfortably hard, 7/10 effort</div>
+    </div>
+    <div class="pace-card">
+      <div class="pace-type">Interval / Repeats</div>
+      <div class="pace-val" style="color:var(--accent2)">6:00–6:30</div>
+      <div class="pace-note">min/km · hard, 8–9/10 effort</div>
+    </div>
+    <div class="pace-card">
+      <div class="pace-type">Long Run</div>
+      <div class="pace-val" style="color:var(--accent)">7:30–8:30</div>
+      <div class="pace-note">min/km · slow and steady, finish strong</div>
+    </div>
+    <div class="pace-card">
+      <div class="pace-type">Race Target Pace</div>
+      <div class="pace-val" style="color:var(--accent)">~6:45</div>
+      <div class="pace-note">min/km → finishes in ~2:22–2:25</div>
+    </div>
+    <div class="pace-card">
+      <div class="pace-type">10K Equivalent</div>
+      <div class="pace-val" style="color:var(--muted)">8:24</div>
+      <div class="pace-note">min/km · your current baseline pace</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="section" style="margin-top:40px;">
+  <div class="section-title">Key Tips for Success</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">💧</div>
+      <div>
+        <div class="tip-title">Hydration & Nutrition</div>
+        <div class="tip-body">Start hydrating the night before long runs. Carry a bottle for runs over 75 min. Try a banana or date 30 min before. Practice your race-day fuel strategy during long runs — don't try anything new on Oct 18.</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">😴</div>
+      <div>
+        <div class="tip-title">Sleep is Training</div>
+        <div class="tip-body">7–8 hours of sleep matters as much as the run itself. Your body adapts during rest, not during the run. Prioritize sleep over early-morning workouts if you've had under 6 hrs.</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🦵</div>
+      <div>
+        <div class="tip-title">Strength & Mobility</div>
+        <div class="tip-body">Add 15 min of glute bridges, calf raises, and hip flexor stretches on easy days. Strong glutes = injury prevention. A simple post-run stretch routine prevents tightness from compounding.</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📲</div>
+      <div>
+        <div class="tip-title">HDOR App</div>
+        <div class="tip-body">VDHM is a virtual event — download the HDOR app and log your 21.1 km run on Oct 18. Use your registered email to access your race profile. Track your GPS to get your official finish time.</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📅</div>
+      <div>
+        <div class="tip-title">Trust the Taper</div>
+        <div class="tip-body">Weeks 11–12 you'll feel sluggish and itchy to run more — don't. Taper preserves all your hard-earned fitness. Your legs need to arrive at the start line fresh, not just fit.</div>
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🎯</div>
+      <div>
+        <div class="tip-title">Race Strategy</div>
+        <div class="tip-body">Start at 7:00 min/km for the first 5 km (easier than target). Settle into 6:45 pace from km 5–18. Push the final 3 km. Going out too fast is the #1 mistake in half marathons.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>Race Day: Sunday, 18 October 2026</strong> · Vedanta Delhi Half Marathon 2026 (Virtual) · 21.097 km<br>
+  Goal: <strong>Sub 2:30</strong> · Target pace: ~6:45 min/km · Transaction: DHM2624834341784973917066<br>
+  You've got 12 strong weeks. One run at a time. <strong>You've got this. 💪</strong>
+</div>
+
+<script>
+const weeks = [
+  {
+    num: 1, phase: 'base', dates: 'Jul 25 – Jul 31', total: '28 km',
+    focus: 'Getting comfortable — easy running, add strides',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run + 4×20sec strides at end', km: 5 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest or light yoga / walk', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: 'Easy long run, conversational pace', km: 10 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Full rest — let Sunday sink in', km: 0 },
+      { day: 'Tuesday', type: 'easy', label: 'Easy', detail: 'Easy recovery run', km: 5 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train: cycling / swimming / yoga', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up 10min → Tempo 20min → Cool-down 10min', km: 8 },
+    ]
+  },
+  {
+    num: 2, phase: 'base', dates: 'Aug 1 – Aug 7', total: '30 km',
+    focus: 'Building aerobic base, slightly longer long run',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run + 4×20sec strides', km: 5 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest or walk', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: 'Easy long run at 8:00–9:00 /km', km: 12 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Full rest', km: 0 },
+      { day: 'Tuesday', type: 'easy', label: 'Easy', detail: 'Easy recovery run', km: 5 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train or rest', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 25min → Cool-down', km: 8 },
+    ]
+  },
+  {
+    num: 3, phase: 'base', dates: 'Aug 8 – Aug 14', total: '33 km',
+    focus: 'Introduce a medium run mid-week',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run + 6×20sec strides', km: 6 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest or yoga', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: 'Long run at easy effort', km: 13 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Full rest', km: 0 },
+      { day: 'Tuesday', type: 'easy', label: 'Easy', detail: 'Easy run + core work', km: 6 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train: cycling or swim', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 28min → Cool-down', km: 8 },
+    ]
+  },
+  {
+    num: 4, phase: 'base', dates: 'Aug 15 – Aug 21', total: '26 km',
+    focus: 'Recovery week — pull back 20%',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy short run, no strides', km: 5 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: 'Easy long run — shorter than last week', km: 10 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Full rest', km: 0 },
+      { day: 'Tuesday', type: 'easy', label: 'Easy', detail: 'Easy run', km: 5 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Light cross-train or walk', km: 0 },
+      { day: 'Thursday', type: 'easy', label: 'Easy', detail: 'Easy run — no tempo this week', km: 6 },
+    ]
+  },
+  {
+    num: 5, phase: 'build', dates: 'Aug 22 – Aug 28', total: '36 km',
+    focus: 'Threshold work begins — 4×1 km intervals',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run + 6×20sec strides', km: 6 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: 'Long run, last 3 km at tempo feel', km: 14 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Tuesday', type: 'interval', label: 'Intervals', detail: '2km WU → 4×1km @ 6:15–6:30/km, 90sec rest → 2km CD', km: 8 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train or easy walk', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 30min at 6:45–7:00/km → Cool-down', km: 8 },
+    ]
+  },
+  {
+    num: 6, phase: 'build', dates: 'Aug 29 – Sep 4', total: '38 km',
+    focus: 'Mid-run race-pace kilometers',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run', km: 6 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: '16 km long run — km 8–12 at race pace (6:45)', km: 16 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Tuesday', type: 'interval', label: 'Intervals', detail: '2km WU → 5×1km @ 6:15/km, 90sec rest → 2km CD', km: 9 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 32min → Cool-down', km: 8 },
+    ]
+  },
+  {
+    num: 7, phase: 'build', dates: 'Sep 5 – Sep 11', total: '40 km',
+    focus: 'Longest week — building confidence',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run + strides', km: 7 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: '17 km — relaxed, controlled effort', km: 17 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Tuesday', type: 'interval', label: 'Intervals', detail: '2km WU → 6×800m @ 6:00–6:15/km, 75sec rest → 2km CD', km: 8 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 35min → Cool-down', km: 8 },
+    ]
+  },
+  {
+    num: 8, phase: 'build', dates: 'Sep 12 – Sep 18', total: '28 km',
+    focus: 'Recovery week — consolidate fitness',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy short run', km: 5 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: 'Easy long run at recovery pace', km: 12 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Tuesday', type: 'easy', label: 'Easy', detail: 'Easy run — no intervals', km: 6 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train or rest', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 25min (lighter) → Cool-down', km: 6 },
+    ]
+  },
+  {
+    num: 9, phase: 'peak', dates: 'Sep 19 – Sep 25', total: '42 km',
+    focus: 'Peak week 1 — race-pace long run',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run + strides', km: 7 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: '18 km — km 10–15 at race pace 6:45/km', km: 18 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Tuesday', type: 'interval', label: 'Intervals', detail: '2km WU → 3×2km @ 6:30/km, 2min rest → 2km CD', km: 10 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 35min at race pace → Cool-down', km: 8 },
+    ]
+  },
+  {
+    num: 10, phase: 'peak', dates: 'Sep 26 – Oct 2', total: '38 km',
+    focus: 'Peak week 2 — confidence builder',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run', km: 6 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: '16 km — last 5 km pushed at race pace', km: 16 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Tuesday', type: 'interval', label: 'Intervals', detail: '2km WU → 5×1km @ 6:15/km, 90sec rest → 2km CD', km: 9 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Cross-train', km: 0 },
+      { day: 'Thursday', type: 'tempo', label: 'Tempo', detail: 'Warm-up → Tempo 30min → Cool-down', km: 7 },
+    ]
+  },
+  {
+    num: 11, phase: 'taper', dates: 'Oct 3 – Oct 9', total: '26 km',
+    focus: 'Taper begins — reduce volume, keep intensity',
+    days: [
+      { day: 'Friday', type: 'easy', label: 'Easy', detail: 'Easy run + 4×20sec strides', km: 5 },
+      { day: 'Saturday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Sunday', type: 'long', label: 'Long', detail: 'Easy long run — 12 km max', km: 12 },
+      { day: 'Monday', type: 'rest', label: 'Rest', detail: 'Rest', km: 0 },
+      { day: 'Tuesday', type: 'interval', label: 'Intervals', detail: '2km WU → 3×1km @ race effort → 2km CD (short session)', km: 6 },
+      { day: 'Wednesday', type: 'cross', label: 'Cross', detail: 'Light cross-train or walk', km: 0 },
+      { day: 'Thursday', type: 'easy', label: 'Easy', detail: 'Easy shakeout run', km: 3 },
+    ]
+  },
+  {
+    num: 12, phase: 'taper', dates: 'Oct 10 – Oct 18 🏁', total: 'Race Week',
+    focus: 'Race week — stay fresh, run easy, race hard on Oct 18',
+    days: [
+      { day: 'Friday Oct 10', type: 'easy', label: 'Easy', detail: 'Easy 20–25 min run, light strides', km: 4 },
+      { day: 'Sat–Sun', type: 'rest', label: 'Rest', detail: 'Rest or gentle walk — no running', km: 0 },
+      { day: 'Monday', type: 'easy', label: 'Easy', detail: 'Easy 20 min jog — loosen up', km: 3 },
+      { day: 'Tue–Wed', type: 'rest', label: 'Rest', detail: 'Full rest — prep gear, check HDOR app', km: 0 },
+      { day: 'Thursday Oct 15', type: 'easy', label: 'Easy', detail: '15 min shakeout run + 4 strides', km: 3 },
+      { day: 'Fri–Sat', type: 'rest', label: 'Rest', detail: 'Rest, hydrate, carb load, sleep well', km: 0 },
+      { day: '🏁 Sun Oct 18', type: 'long', label: 'RACE', detail: 'Vedanta Delhi Half Marathon — 21.097 km — Sub 2:30! 🎉', km: 21 },
+    ]
+  },
+];
+
+const typeClass = { easy:'type-easy', tempo:'type-tempo', long:'type-long', rest:'type-rest', cross:'type-cross', interval:'type-interval' };
+
+function renderWeek(w) {
+  const rows = w.days.map(d => `
+    <div class="day-row">
+      <div class="day-name">${d.day}</div>
+      <div><span class="run-type ${typeClass[d.type]}">${d.label}</span></div>
+      <div class="day-detail">${d.detail}</div>
+      <div class="day-km">${d.km > 0 ? d.km + ' <span class="unit">km</span>' : '—'}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('weekTable').innerHTML = `
+    <div class="week-header">
+      <div>
+        <div class="wh-title">Week ${w.num} — ${w.focus}</div>
+      </div>
+      <div class="wh-meta">${w.dates} · ${w.total}</div>
+    </div>
+    ${rows}
+  `;
+}
+
+function buildNav() {
+  const nav = document.getElementById('weekNav');
+  weeks.forEach((w, i) => {
+    const btn = document.createElement('button');
+    btn.className = `week-btn phase-${w.phase}`;
+    btn.textContent = `W${w.num}`;
+    btn.title = w.dates;
+    btn.onclick = () => {
+      document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderWeek(w);
+    };
+    if (i === 0) { btn.classList.add('active'); }
+    nav.appendChild(btn);
+  });
+}
+
+buildNav();
+renderWeek(weeks[0]);
+</script>
+</body>
+</html>
