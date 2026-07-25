@@ -1,101 +1,23 @@
-# 🏃 Vedanta Delhi Half Marathon 2026 — Training Plan
+# My Half Marathon Training Plan 🏃
 
-A personal 12-week half marathon training plan built for me, targeting a **Sub 2:30 finish** at the Vedanta Delhi Half Marathon 2026 (Virtual Event) on **October 18, 2026**.
+I recently finished my first 10K in 1:24 and signed up for the Vedanta Delhi Half Marathon 2026. This repo is my personal training plan to get me to the finish line in under 2:30.
 
----
+Race day is **18 October 2026** — 21.097 km virtual run.
 
-## 🎯 Race Details
+## What's in here
 
-| Detail | Info |
-|---|---|
-| **Event** | Vedanta Delhi Half Marathon 2026 |
-| **Category** | Virtual Half Marathon |
-| **Distance** | 21.097 km |
-| **Race Date** | Sunday, 18 October 2026 |
-| **Goal** | Sub 2:30 (pace ~6:45 min/km) |
-| **Baseline** | 10 km completed in 1:24 |
+Just one file — `index.html`. Open it in any browser and you get my full 12 week plan with daily workouts, pace targets, and tips. I built it so I can check it anytime without needing an app.
 
----
+## How to view it
 
-## 📋 What's Inside
+Either visit the GitHub Pages link or just download `index.html` and open it in your browser. That's it.
 
-A single-file interactive HTML training plan (`index.html`) that includes:
+## Where I started
 
-- **12-week day-by-day schedule** — click any week to see that week's full breakdown
-- **4 training phases** — Base Build → Build & Threshold → Peak → Taper
-- **Pace guide** — Easy, Tempo, Interval, Long Run, and Race pace targets
-- **Race strategy tips** — hydration, sleep, taper, and HDOR app guidance
-- **Mobile responsive** — works on phone, tablet, and desktop
+- Completed my first 10K in 1:24
+- Running 4 days a week
+- No injuries, feeling good
 
----
+## Goal
 
-## 🗂️ Files
-
-```
-vdhm-training-plan/
-├── index.html      ← entire training plan (open this in any browser)
-└── README.md       ← this file
-```
-
-No frameworks. No dependencies. No build step. Just open `index.html`.
-
----
-
-## 🚀 Viewing the Plan
-
-### Option 1 — GitHub Pages (live URL)
-The plan is deployed at:
-```
-https://YOUR-USERNAME.github.io/vdhm-training-plan/
-```
-Bookmark this and access it from any device, anytime.
-
-### Option 2 — Locally
-Download `index.html` and open it in any browser. No internet needed.
-
----
-
-## 📅 Training Phases at a Glance
-
-| Phase | Weeks | Dates | Focus |
-|---|---|---|---|
-| 🟢 Base Build | 1–4 | Jul 25 – Aug 21 | Aerobic base, easy mileage, strides |
-| 🟡 Build & Threshold | 5–8 | Aug 22 – Sep 18 | Tempo runs, intervals, long runs to 18 km |
-| 🔴 Peak | 9–10 | Sep 19 – Oct 2 | Race-pace long runs, confidence |
-| 🔵 Taper | 11–12 | Oct 3 – Oct 18 | Volume drops, legs stay fresh |
-
----
-
-## 👟 Target Paces
-
-| Run Type | Pace (min/km) |
-|---|---|
-| Easy / Recovery | 8:00 – 9:00 |
-| Tempo / Threshold | 6:45 – 7:10 |
-| Intervals | 6:00 – 6:30 |
-| Long Run | 7:30 – 8:30 |
-| **Race Target** | **~6:45** |
-
----
-
-## 📱 Race Day — HDOR App
-
-VDHM 2026 is a **virtual event**. To submit your official result:
-1. Download the **HDOR app**
-2. Log in with your registered email
-3. Run 21.097 km on **October 18, 2026** with GPS tracking on
-4. Submit your run through the app
-
----
-
-## ✏️ Updating the Plan
-
-To make changes:
-1. Open `index.html` on GitHub
-2. Click the **pencil (edit)** icon
-3. Edit and **Commit changes**
-4. Your live URL updates within ~30 seconds
-
----
-
-*Built with pure HTML, CSS & JavaScript. No libraries required.*
+Finish the half marathon in under 2:30. One run at a time.
